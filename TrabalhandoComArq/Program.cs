@@ -119,6 +119,32 @@ namespace TrabalhandoComArq
                 Console.WriteLine(e.Message);
             }
 
+            // Exemplo Directory e DirectoyInfo = Operações com pastas(create, enumerate, get files, entre outros)
+            // Directory = Membros statics
+            // DirectoryInfo = Membros de instancia
+
+            string caminho = @"c:\temp\myfolder";
+            try
+            {
+                var folders = Directory.EnumerateDirectories(caminho, "*.*", SearchOption.AllDirectories);
+                Console.WriteLine("FOLDERS:");
+                foreach (string s in folders)
+                {
+                    Console.WriteLine(s);
+                }
+                var files = Directory.EnumerateFiles(caminho, "*.*", SearchOption.AllDirectories);
+                Console.WriteLine("FILES:");
+                foreach (string s in files)
+                {
+                    Console.WriteLine(s);
+                }
+                Directory.CreateDirectory(@"c:\temp\myfolder\newfolder");
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred");
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

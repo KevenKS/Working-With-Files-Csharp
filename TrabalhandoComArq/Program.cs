@@ -126,18 +126,21 @@ namespace TrabalhandoComArq
             string caminho = @"c:\temp\myfolder";
             try
             {
+                // Listar as pastas a partir de um diretorio informado
                 var folders = Directory.EnumerateDirectories(caminho, "*.*", SearchOption.AllDirectories);
                 Console.WriteLine("FOLDERS:");
                 foreach (string s in folders)
                 {
                     Console.WriteLine(s);
                 }
+                // Listar os arquivos a partir de um diretorio informado
                 var files = Directory.EnumerateFiles(caminho, "*.*", SearchOption.AllDirectories);
                 Console.WriteLine("FILES:");
                 foreach (string s in files)
                 {
                     Console.WriteLine(s);
                 }
+                // criar um diretorio
                 Directory.CreateDirectory(@"c:\temp\myfolder\newfolder");
             }
             catch (IOException e)
@@ -145,6 +148,27 @@ namespace TrabalhandoComArq
                 Console.WriteLine("An error occurred");
                 Console.WriteLine(e.Message);
             }
+
+            // Exemplo classe path = Realiza operações com strings que contém info/caminhos de arq ou diretorios
+
+            string patth = @"c:\temp\myfolder\file1.txt";
+
+            // Caracter de separação
+            Console.WriteLine("DirectorySeparatorChar: " + Path.DirectorySeparatorChar);
+            // Caracter para separar path/pastas diferentes. Ex: Quando voce define a var path do windows, utiliza o pathseparator para separar as pastas;
+            Console.WriteLine("PathSeparator: " + Path.PathSeparator);
+            // porção da string apenas com o caminho das pastas. Retirando o nome do arq.
+            Console.WriteLine("GetDirectoryName: " + Path.GetDirectoryName(patth));
+            // Pegar o nome do arq
+            Console.WriteLine("GetFileName: " + Path.GetFileName(patth));
+            // Extensão do arq
+            Console.WriteLine("GetExtension: " + Path.GetExtension(patth));
+            // Nome do arq sem extesão
+            Console.WriteLine("GetFileNameWithoutExtension: " + Path.GetFileNameWithoutExtension(patth));
+            // O caminho completo
+            Console.WriteLine("GetFullPath: " + Path.GetFullPath(patth));
+            // Pasta temporaria do sistema
+            Console.WriteLine("GetTempPath: " + Path.GetTempPath());
         }
     }
 }

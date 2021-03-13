@@ -24,9 +24,9 @@ namespace TrabalhandoComArq
                 //Usando a classe File (a qual não precisa de instancia) somado com o metodo ReadAllLines (ler todas as linhas do arq); 
                 String[] linesArq = File.ReadAllLines(PathOrigem);
                 // foreach para ler e printar todas as lines dentro do vetor;
-                foreach (string line in linesArq)
+                foreach (string line1 in linesArq)
                 {
-                    Console.WriteLine(line);
+                    Console.WriteLine(line1);
                 }
             }
             catch (IOException e)
@@ -34,6 +34,69 @@ namespace TrabalhandoComArq
                 throw new IOException("Erro!! " + e.Message);
             }
 
+            // Exemplo FileStream & StreamReader
+
+            string path = @"c:\temp\file1.txt";
+            FileStream fs = null;
+            StreamReader sr = null;
+            try
+            {
+                fs = new FileStream(path, FileMode.Open); // File.OpenRead(path);
+                sr = new StreamReader(fs);
+                string line2 = sr.ReadLine();
+                Console.WriteLine(line2);
+            }
+            catch (IOException e)
+            {
+                throw new IOException("Erro!! " + e.Message);
+            }
+            finally
+            {
+                if (sr != null) sr.Close();
+                if (fs != null) fs.Close();
+            }
+
+            // Exemplo sintaxe simplificada, usando apenas StreamReader
+
+            string path1 = @"c:\temp\file1.txt";
+            StreamReader ssr = null;
+            try
+            {
+                ssr = File.OpenText(path1);
+                while (!ssr.EndOfStream)
+                {
+                    string line3 = ssr.ReadLine();
+                    Console.WriteLine(line3);
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred");
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (ssr != null) ssr.Close();
+            }
+
+            // Exemplo Bloco using = Sintaxe simplificada que garante que os obj IDisposable serão fechado automaticamente.
+
+            string pathh = @"c:\temp\file1.txt";
+            try
+            {
+                using (StreamReader srr = File.OpenText(pathh))
+                {
+                    while (!srr.EndOfStream)
+                    {
+                        string line4 = srr.ReadLine();
+                        Console.WriteLine(line4);
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                throw new IOException("Erro!! " + e.Message);
+            }
         }
     }
 }

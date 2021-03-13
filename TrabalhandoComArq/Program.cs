@@ -97,6 +97,28 @@ namespace TrabalhandoComArq
             {
                 throw new IOException("Erro!! " + e.Message);
             }
+
+            // Exemplo StreamWriter = É uma stream capaz de escrever caracteres a partir de uma stream binária(ex: FileStream); Suporta dados no formato texto;
+
+            string sourcePath = @"c:\temp\file1.txt";
+            string targetPath = @"c:\temp\file2.txt";
+            try
+            {
+                string[] lines5 = File.ReadAllLines(sourcePath);
+                using (StreamWriter sw = File.AppendText(targetPath))
+                {
+                    foreach (string line5 in lines5)
+                    {
+                        sw.WriteLine(line5.ToUpper());
+                    }
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred");
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }
